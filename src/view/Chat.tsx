@@ -38,13 +38,14 @@ const Chat: React.FC = () => {
         sender: "bot",
       };
       setMessages((prev) => [...prev, botMessage]);
-    }, 1000);
+    }, 100);
   };
 
   return (
     <>
       <h3>Chat UI</h3>
       <div
+        className="chat-container"
         style={{
           width: "100%",
           maxWidth: "100%",
@@ -59,39 +60,13 @@ const Chat: React.FC = () => {
             flex: 1,
             overflowY: "auto",
             //   border: "1px solid #ccc",
-            padding: "10px",
+            paddingRight: "5rem",
             //   marginBottom: "10px",
             borderRadius: "10px",
             scrollbarWidth: "thin" /* Firefox */,
             scrollbarColor: "#555 #1e1e1e",
           }}
         >
-          {/* Custom Scrollbar สำหรับ Chrome และ Edge */}
-          <style>
-            {`
-              /* Chrome & Edge */
-              ::-webkit-scrollbar {
-                width: 8px;
-              }
-              ::-webkit-scrollbar-track {
-                background: #1e1e1e;
-                border-radius: 10px;
-              }
-              ::-webkit-scrollbar-thumb {
-                background: #555;
-                border-radius: 10px;
-              }
-              ::-webkit-scrollbar-thumb:hover {
-                background: #777;
-              }
-
-              /* Firefox */
-              * {
-                scrollbar-width: thin;
-                scrollbar-color: #555 #1e1e1e;
-              }
-            `}
-          </style>
           {messages.map((msg) => (
             <div
               key={msg.id}

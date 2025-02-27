@@ -10,7 +10,7 @@ function App() {
       <Layout>
         <div className='container'>
           <Routes>
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/" element={<Chat />} />
           </Routes>
         </div>
           
