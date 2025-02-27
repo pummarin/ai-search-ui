@@ -69,28 +69,28 @@ const Chat: React.FC = () => {
           {/* Custom Scrollbar สำหรับ Chrome และ Edge */}
           <style>
             {`
-      /* Chrome & Edge */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1e1e1e;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #555;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #777;
-      }
+              /* Chrome & Edge */
+              ::-webkit-scrollbar {
+                width: 8px;
+              }
+              ::-webkit-scrollbar-track {
+                background: #1e1e1e;
+                border-radius: 10px;
+              }
+              ::-webkit-scrollbar-thumb {
+                background: #555;
+                border-radius: 10px;
+              }
+              ::-webkit-scrollbar-thumb:hover {
+                background: #777;
+              }
 
-      /* Firefox */
-      * {
-        scrollbar-width: thin;
-        scrollbar-color: #555 #1e1e1e;
-      }
-      `}
+              /* Firefox */
+              * {
+                scrollbar-width: thin;
+                scrollbar-color: #555 #1e1e1e;
+              }
+            `}
           </style>
           {messages.map((msg) => (
             <div
