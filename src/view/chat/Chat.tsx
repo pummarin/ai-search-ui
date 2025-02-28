@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-
+import { BASE_URL } from "../../api/config";
+import axios from "axios";
+import { User } from "../../model/userModel";
+const API_URL = process.env.REACT_APP_API_URL;
 interface Message {
   id: number;
   text: string;
@@ -11,6 +13,7 @@ interface Message {
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [user, setUsers] = useState<User[]>([]);
   const chatBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,8 +22,16 @@ const Chat: React.FC = () => {
     }
   }, [messages]);
 
-  const sendMessage = () => {
+  const getUsers = async () => {
+    axios
+      .get(`${API_URL}/get-all-users`)
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error("Error:", err));
+  };
+
+  const sendMessage = async () => {
     if (!input.trim()) return;
+    getUsers();
 
     const newMessage: Message = {
       id: messages.length + 1,
@@ -30,15 +41,18 @@ const Chat: React.FC = () => {
 
     setMessages([...messages, newMessage]);
     setInput("");
-
+    let botReply = "";
+    if (input === "user") {
+      botReply = user[0].username;
+    }
     setTimeout(() => {
       const botMessage: Message = {
         id: messages.length + 2,
-        text: "Hello! How can I help you?",
+        text: botReply ? botReply : "Hello! How can I help you?",
         sender: "bot",
       };
       setMessages((prev) => [...prev, botMessage]);
-    }, 100);
+    }, 500);
   };
 
   return (
